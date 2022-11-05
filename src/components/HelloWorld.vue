@@ -1,9 +1,22 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div>
-     <PostForm/>
-     <PostList  :posts="posts"/>
+      <h1>Страница с постами</h1>
+
+      <div >
+        <MyButton @click="fetchPosts">Получить посты с сервера</MyButton>
+      <MyButton @click="showDialog"  >Создать пост</MyButton>
+        <MySelect class="app_select"  v-model="selectedSort" :options="sortOptions"></MySelect>
+
+      </div>
+
+     
+    <MyDialog v-model:show="dialogVisible">
+     <PostForm  @create="createPost" />
+       
+    </MyDialog>
+    <div >
+     <PostList  :posts="posts"  @remove="removePost"  v-if="!isPostsLoading"/>
+     <h3 v-else>Идет загрузка ...</h3>
     </div>
    
  
@@ -14,6 +27,7 @@
 <script>
 import PostForm from '@/components/PostForm.vue'
 import PostList from '@/components/PostList.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -21,37 +35,48 @@ export default {
   },
   data() {
     return {
-      posts: [
-        { id: 1, title: "JavaScript", body: 'описание поста' },
-        { id: 2, title: "JavaScript 2 ", body: 'описание поста 2 ' },
-        { id: 3, title: "JavaScript 3 ", body: 'описание поста 3 ' },
-      ],
-      title: '',
-      body: ''
+      posts: [],
+      dialogVisible: false,
+      isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+      {value: 'title' , name : 'По названию'},
+      {value: 'body' , name : 'По содержанию'},
+      ]
     }
   },
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
   methods: {
-    CreatePost(){
-        const newPost = {
-          id: Date.now(),
-          title: this.title,
-          body: this.body,
-        }
-        this.posts.push(newPost)
-        this.title = ''
-        this.body = ''
+    createPost(post){
+        this.posts.push(post)
+        this.dialogVisible = false
     },
+    removePost(post){
+      this.posts = this.posts.filter(p => p.id !== post.id)
+    },
+    showDialog() {
+      this.dialogVisible = true
+    },
+    async fetchPosts() {
+      try {
+        this.isPostsLoading = true
+        setTimeout( async ()=>{
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        this.posts = response.data
+        this.isPostsLoading = false
+        }, 1000)
+        
+      } catch (e) {
+        alert('Error', e)
+      }
+    }
     
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style  >
 h3 {
   margin: 40px 0 0;
 }
@@ -71,6 +96,10 @@ a {
 }
 
 
-
+.app_select {
+  
+  padding: 10px 20px;
+  
+}
 
 </style>
