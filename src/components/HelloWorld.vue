@@ -147,14 +147,17 @@ a {
 
 .page {
   
-  border: 1px solid black;
+  border-bottom: 2px #000000 solid;
   padding: 15px 10px;
   border-radius: 5px;
   margin: 0 2px;
+  cursor: pointer;
 }
 
+ 
+
 .current_page {
-  border: 1px solid  #42b983;
+   border-bottom: 2px #42b983 solid;
   padding: 15px 10px;
   border-radius: 5px;
 }

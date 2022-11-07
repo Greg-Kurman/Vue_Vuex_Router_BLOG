@@ -34,6 +34,7 @@ export default {
 <style>
 .select {
     border: 1px #42b983 solid ;
+    cursor: pointer;
 }
 
 </style>

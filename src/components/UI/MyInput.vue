@@ -22,6 +22,7 @@ export default {
     width: 80%;
     border: 1px solid #42b983;
     padding: 10px 15px;
-    margin-top: 5px
+    margin-top: 5px;
+    cursor: pointer;
 }
 </style>

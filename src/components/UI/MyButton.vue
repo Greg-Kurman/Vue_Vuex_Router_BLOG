@@ -20,5 +20,6 @@ export default {
   background-color: #42b983;
   border-radius: 5px;
   padding: 10px 15px;
+  cursor: pointer;
 }
 </style>
