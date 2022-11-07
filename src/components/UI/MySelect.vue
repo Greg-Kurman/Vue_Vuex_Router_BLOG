@@ -1,5 +1,5 @@
 <template>
-    <select v-model="modelValue" @change="changeOption">
+    <select v-model="modelValue" @change="changeOption" class="select">
         <option disabled value="">Сортировка постов по: </option>
         <option v-for="option in options" :key="option.value" :value="option.value">{{ option.name }}</option>
     </select>
@@ -32,5 +32,8 @@ export default {
 
 
 <style>
+.select {
+    border: 1px #42b983 solid ;
+}
 
 </style>

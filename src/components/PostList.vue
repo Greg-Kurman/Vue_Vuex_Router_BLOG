@@ -5,7 +5,7 @@
             <postItem v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)" />
         </transition-group>
     </div>
-    <h2 v-else style="color:brown">
+    <h2 v-else >
         Список постов пуст
     </h2>
 </template>

@@ -146,6 +146,7 @@ a {
 }
 
 .page {
+  
   border: 1px solid black;
   padding: 15px 10px;
   border-radius: 5px;
