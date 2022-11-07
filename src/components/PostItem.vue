@@ -1,6 +1,7 @@
 <template>
     <div class="post" >
         <div>
+            <div class="post_num"> ID:{{post.id}}</div>
             <div class="post_head"><strong>Название:</strong> {{ post.title }}</div>
             <div class="post_body"><strong>Описание:</strong>{{ post.body }}</div>
         </div>
@@ -32,6 +33,11 @@ padding: 20px 10px;
 display: flex;
 align-items: center;
 justify-content: space-between;
+}
+
+.post_num {
+    margin: -5px 0 0 0 ;
+    padding: 0 0 5px 0;
 }
 
 
